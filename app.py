@@ -14,6 +14,9 @@ app.config["SECRET_KEY"] = "your_secret_key_here"
 # )
 db_url = os.environ.get("DATABASE_URL")
 
+if not db_url:
+    db_url = "sqlite:///local.db" 
+
 if db_url and db_url.startswith("postgres://"):
     db_url = db_url.replace("postgres://", "postgresql://", 1)
 app.config["SQLALCHEMY_DATABASE_URI"] = db_url
